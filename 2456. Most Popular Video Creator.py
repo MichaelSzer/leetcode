@@ -11,8 +11,14 @@ class Solution:
             creators_views[creators[i]][0] = curr_views + views[i]
             creators_views[creators[i]][1] = (views[i], ids[i]) if curr_most_popular_video[0] < views[i] or (curr_most_popular_video[0] == views[i] and ids[i] < curr_most_popular_video[1]) else curr_most_popular_video
 
+        # release memory
+        del creators, ids, views
+
         # convert dictionary into a sortable list - TC: O(n)
         creators_views_list = list(map(lambda creator_views_key: (creators_views[creator_views_key][0], creator_views_key, creators_views[creator_views_key][1][1]), creators_views))
+
+        # release memory
+        del creators_views
 
         # sort list - TC: O(n * log n)
         creators_views_list.sort(reverse=True)
